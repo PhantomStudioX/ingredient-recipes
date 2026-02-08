@@ -1,1 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ingredient Recipes</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
 
+  <h1>Ingredient Recipe Finder</h1>
+
+  <div class="container">
+    <input id="ingredientInput" type="text" placeholder="Enter an ingredient..." />
+    <button onclick="addIngredient()">Add Ingredient</button>
+
+    <ul id="ingredientsList"></ul>
+
+    <button onclick="getRecipes()" class="fetch-btn">Find Recipes</button>
+
+    <div id="recipes"></div>
+  </div>
+
+  <script src="script.js"></script>
+
+</body>
+</html>
