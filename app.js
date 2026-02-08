@@ -52,13 +52,14 @@ function displayResults(recipes) {
 
   recipes.forEach((recipe) => {
     container.innerHTML += `
-      <div class="p-4 bg-white border rounded mb-4">
+      <div class="bg-white rounded-xl shadow p-4 hover:shadow-lg transition">
+        <img src="${recipe.image}" class="rounded-lg w-full mb-3" />
+
         <h2 class="text-xl font-bold mb-2">${recipe.title}</h2>
-        <img src="${recipe.image}" class="w-full rounded mb-2" />
 
         <button onclick="getDetails(${recipe.id})"
-          class="w-full bg-purple-600 text-white py-2 rounded">
-          View Details
+          class="w-full bg-purple-600 text-white py-2 rounded hover:bg-purple-700 transition">
+          View Recipe
         </button>
       </div>
     `;
