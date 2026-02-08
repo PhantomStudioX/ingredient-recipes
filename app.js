@@ -38,10 +38,19 @@ async function searchRecipes() {
     return;
   }
 
-  const url = `https://api.spoonacular.com/recipes/findByIngredients?ingredients=${ingredients.join(",")}&number=10&apiKey=${API_KEY}`;
+  const url = `https://api.spoonacular.com/recipes/findByIngredients?ingredients=${ingredients.join(",")}&number=20&apiKey=${API_KEY}`;
 
   const response = await fetch(url);
-  const data = await response.json();
+  let data = await response.json();
+
+  // ❗ Filter to show only normal, simple recipes:
+  data = data.filter(r =>
+    !r.title.toLowerCase().includes("gourmet") &&
+    !r.title.toLowerCase().includes("fine dining") &&
+    !r.title.toLowerCase().includes("beef wellington") &&
+    !r.title.toLowerCase().includes("souffle") &&
+    r.missedIngredientCount <= 3  // fewer missing ingredients = easier
+  );
 
   displayResults(data);
 }
