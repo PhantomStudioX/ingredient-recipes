@@ -3,25 +3,40 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ingredient Recipes</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>Ingredient Recipe Finder</title>
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="styles.css" />
 </head>
-<body>
 
-  <h1>Ingredient Recipe Finder</h1>
+<body class="bg-gray-100 text-gray-900">
+  <div class="max-w-2xl mx-auto p-6">
+    <h1 class="text-3xl font-bold mb-4 text-center">Ingredient Recipe Finder</h1>
 
-  <div class="container">
-    <input id="ingredientInput" type="text" placeholder="Enter an ingredient..." />
-    <button onclick="addIngredient()">Add Ingredient</button>
+    <div class="space-y-4">
+      <input id="ingredientInput"
+        class="w-full p-3 border rounded"
+        placeholder="Enter an ingredient and press Add" />
 
-    <ul id="ingredientsList"></ul>
+      <button onclick="addIngredient()"
+        class="w-full bg-blue-600 text-white py-2 rounded">
+        Add Ingredient
+      </button>
 
-    <button onclick="getRecipes()" class="fetch-btn">Find Recipes</button>
+      <div id="ingredientList" class="space-y-2"></div>
+    </div>
 
-    <div id="recipes"></div>
+    <button onclick="searchRecipes()"
+      class="mt-6 w-full bg-green-600 text-white py-3 rounded text-lg">
+      Find Recipes
+    </button>
+
+    <div id="results" class="mt-8"></div>
   </div>
 
-  <script src="script.js"></script>
-
+  <script src="app.js"></script>
 </body>
 </html>
