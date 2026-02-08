@@ -4,39 +4,44 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Ingredient Recipe Finder</title>
-
-  <!-- Tailwind CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
-
-  <!-- Custom CSS -->
   <link rel="stylesheet" href="styles.css" />
 </head>
 
-<body class="bg-gray-100 text-gray-900">
-  <div class="max-w-2xl mx-auto p-6">
-    <h1 class="text-3xl font-bold mb-4 text-center">Ingredient Recipe Finder</h1>
+<body class="bg-[#fafafa] text-gray-900">
+  <!-- HERO SECTION -->
+  <section class="text-center py-20 px-6 bg-white shadow-md">
+    <h1 class="text-4xl font-bold mb-4">Find Recipes From What’s In Your Kitchen</h1>
+    <p class="text-lg text-gray-600 max-w-xl mx-auto">
+      Enter the ingredients you already have and discover easy, everyday recipes anyone can make.
+    </p>
 
-    <div class="space-y-4">
-      <input id="ingredientInput"
-        class="w-full p-3 border rounded"
-        placeholder="Enter an ingredient and press Add" />
+    <a href="recipes.html"
+      class="mt-6 inline-block bg-green-600 text-white py-3 px-6 rounded-lg text-lg font-semibold hover:bg-green-700 transition">
+      Start Finding Recipes
+    </a>
+  </section>
 
-      <button onclick="addIngredient()"
-        class="w-full bg-blue-600 text-white py-2 rounded">
-        Add Ingredient
-      </button>
-
-      <div id="ingredientList" class="space-y-2"></div>
+  <!-- FEATURE SECTION -->
+  <section class="max-w-4xl mx-auto py-16 px-6 grid md:grid-cols-3 gap-10">
+    <div class="p-6 bg-white rounded-xl shadow">
+      <h3 class="font-bold text-xl mb-2">✔ Simple Recipes</h3>
+      <p class="text-gray-600">We filter out advanced gourmet recipes—no fancy restaurant meals.</p>
     </div>
 
-    <button onclick="searchRecipes()"
-      class="mt-6 w-full bg-green-600 text-white py-3 rounded text-lg">
-      Find Recipes
-    </button>
+    <div class="p-6 bg-white rounded-xl shadow">
+      <h3 class="font-bold text-xl mb-2">✔ Use What You Have</h3>
+      <p class="text-gray-600">Just enter ingredients and instantly get recipe ideas.</p>
+    </div>
 
-    <div id="results" class="mt-8"></div>
-  </div>
+    <div class="p-6 bg-white rounded-xl shadow">
+      <h3 class="font-bold text-xl mb-2">✔ Fast and Free</h3>
+      <p class="text-gray-600">No account needed. Works on any phone or computer.</p>
+    </div>
+  </section>
 
-  <script src="app.js"></script>
+  <footer class="text-center py-6 text-gray-600">
+    © 2026 Ingredient Recipes
+  </footer>
 </body>
 </html>
