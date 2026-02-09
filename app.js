@@ -85,32 +85,55 @@ async function getDetails(id) {
 }
 
 function showDetailPopup(recipe) {
-  const steps = recipe.analyzedInstructions[0]?.steps || [];
+  // Fallback step cleanup
+  const steps =
+    recipe.analyzedInstructions?.[0]?.steps?.length > 0
+      ? recipe.analyzedInstructions[0].steps
+      : (recipe.instructions || "")
+          .replace(/<[^>]+>/g, "")
+          .split(". ")
+          .map((t, i) => ({ number: i + 1, step: t }))
+          .filter(s => s.step.trim() !== "");
 
-  let stepHtml = steps.map((s, i) => `<p><strong>Step ${i + 1}:</strong> ${s.step}</p>`).join("");
+  const ingredientList = recipe.extendedIngredients
+    .map(i => `<li class="mb-1">• ${i.original}</li>`)
+    .join("");
+
+  const stepHtml = steps
+    .map(s => `<p><strong>Step ${s.number}:</strong> ${s.step}</p>`)
+    .join("");
 
   const html = `
-    <div class="fixed inset-0 bg-black/50 flex items-center justify-center">
-      <div class="bg-white p-6 rounded max-w-lg w-full">
-        <h2 class="text-2xl font-bold mb-2">${recipe.title}</h2>
+    <div id="recipeModal"
+      class="fixed inset-0 bg-black bg-opacity-60 backdrop-blur-md flex justify-center items-center p-4 z-50">
 
-        <img src="${recipe.image}" class="rounded w-full mb-4" />
+      <div class="bg-white rounded-2xl max-w-lg w-full shadow-2xl overflow-hidden animate-fadeIn">
+        <img src="${recipe.image}" class="w-full h-56 object-cover" />
 
-        <h3 class="font-bold text-lg">Instructions</h3>
-        <div class="mt-2 space-y-2">${stepHtml}</div>
+        <div class="p-5">
+          <h2 class="text-2xl font-bold mb-3">${recipe.title}</h2>
 
-        <button onclick="closePopup()"
-          class="mt-4 w-full bg-red-500 text-white py-2 rounded">
-          Close
-        </button>
+          <h3 class="font-semibold text-lg mb-1">Ingredients</h3>
+          <ul class="mb-4 text-gray-700 list-disc pl-5">${ingredientList}</ul>
+
+          <h3 class="font-semibold text-lg mb-1">Instructions</h3>
+          <div class="text-gray-700 leading-relaxed">${stepHtml}</div>
+
+          <button onclick="closePopup()"
+            class="mt-6 w-full bg-red-500 text-white py-2 rounded-lg hover:bg-red-600 transition">
+            Close
+          </button>
+        </div>
       </div>
     </div>
   `;
 
-  document.body.innerHTML += html;
+  document.body.insertAdjacentHTML("beforeend", html);
+  document.body.style.overflow = "hidden";
 }
 
 function closePopup() {
-  const popup = document.querySelector(".fixed");
-  popup.remove();
+  const modal = document.getElementById("recipeModal");
+  if (modal) modal.remove();
+  document.body.style.overflow = "auto";
 }
