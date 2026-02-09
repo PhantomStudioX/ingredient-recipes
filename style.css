@@ -11,3 +11,63 @@ body {
 .animate-fadeIn {
   animation: fadeIn 0.25s ease-out;
 }
+
+/* Overlay */
+.popup-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  z-index: 999;
+}
+
+/* Card */
+.popup-card {
+  background: #fff;
+  width: 100%;
+  max-width: 420px;
+  border-radius: 18px;
+  overflow: hidden;
+  position: relative;
+  max-height: 90vh; /* stops it from going off screen */
+  display: flex;
+  flex-direction: column;
+}
+
+/* Close */
+.close-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  font-size: 26px;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+/* Title */
+.popup-card h2 {
+  margin: 0;
+  padding: 20px;
+  text-align: center;
+  background: #f8f8f8;
+  font-size: 22px;
+  font-weight: 600;
+}
+
+/* Scrollable content */
+.popup-content {
+  padding: 20px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+/* Image */
+.popup-content img {
+  width: 100%;
+  border-radius: 12px;
+  margin-bottom: 15px;
+}
