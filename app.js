@@ -79,12 +79,12 @@ function displayResults(recipes) {
   recipes.forEach((recipe) => {
     container.innerHTML += `
       <div class="recipe-card rounded-2xl overflow-hidden shadow-lg bg-[#1a1a1a] border border-[#333] hover:scale-[1.02] transition">
-        <img src="${recipe.image}" class="w-full h-40 object-cover" />
+        <img src="${recipe.strMealThumb}" class="w-full h-40 object-cover" />
     
         <div class="p-4">
-          <h2 class="font-bold text-lg mb-2 text-white">${recipe.title}</h2>
+          <h2 class="font-bold text-lg mb-2 text-white">${recipe.strMeal}</h2>
     
-          <button onclick="getDetails(${recipe.id})"
+          <button onclick="getDetails('${recipe.idMeal}')"
             class="w-full bg-purple-600 py-2 rounded-lg hover:bg-purple-700 transition">
             View Recipe
           </button>
