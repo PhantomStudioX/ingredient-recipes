@@ -137,13 +137,13 @@ function showDetailPopup(recipe) {
           <h3 class="font-semibold text-lg mb-1">Instructions</h3>
           <div class="leading-relaxed whitespace-pre-line">
             ${steps}
+          </div>
 
           <button onclick="closePopup()"
-            class="w-full bg-red-600 py-3 text-lg font-semibold hover:bg-red-700 transition">
+            class="w-full bg-red-600 py-2 font-semibold hover:bg-red-700 transition">
             Close
           </button>
             
-          </div>
         </div>
 
       </div>
