@@ -1,10 +1,14 @@
-/* Global Dark Mode Theme */
 body {
+  background: #0f0f0f;         /* deep dark background */
+  color: #f5f5f5;              /* bright text */
   font-family: Arial, sans-serif;
-  background: #121212; /* dark background */
-  color: #e8e8e8; /* soft white text */
-  min-height: 100vh;
-  background-attachment: fixed;
+}
+
+/* Card background for results */
+.recipe-card {
+  background: #1a1a1a;
+  border: 1px solid #333;
+  color: white;
 }
 
 /* Smooth fade animation */
