@@ -33,38 +33,36 @@ function removeIngredient(index) {
   displayIngredients();
 }
 
-// ⭐ Get recipes that match ANY ingredient, not all
 async function searchRecipes() {
   if (ingredients.length === 0) {
     alert("Please enter ingredients!");
     return;
   }
 
-  let allResults = [];
+  let ingredientResults = [];
 
-  // fetch recipes for each ingredient separately
+  // Fetch for each ingredient
   for (let ing of ingredients) {
     const url = `https://www.themealdb.com/api/json/v1/1/filter.php?i=${ing}`;
     const response = await fetch(url);
     const data = await response.json();
 
-    if (data.meals) {
-      allResults.push(...data.meals);
+    // If any ingredient has 0 results → no recipe can match all
+    if (!data.meals) {
+      ingredientResults.push([]);
+      continue;
     }
+
+    ingredientResults.push(data.meals); // store meals list
   }
 
-  // remove duplicates
-  const unique = [];
-  const ids = new Set();
+  // INTERSECTION: only meals that appear in EVERY list
+  let commonMeals = ingredientResults.reduce((acc, list) => {
+    if (acc.length === 0) return list; // first list
+    return acc.filter(a => list.some(b => b.idMeal === a.idMeal));
+  }, []);
 
-  allResults.forEach(meal => {
-    if (!ids.has(meal.idMeal)) {
-      ids.add(meal.idMeal);
-      unique.push(meal);
-    }
-  });
-
-  displayResults(unique);
+  displayResults(commonMeals);
 }
 
 function displayResults(recipes) {
