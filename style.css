@@ -71,3 +71,16 @@ body {
   border-radius: 12px;
   margin-bottom: 15px;
 }
+
+/* Recipe background */
+.recipe-page {
+  background: #1a1a1a;
+  color: white;
+}
+
+.recipe-card {
+  background: #262626;
+  border-radius: 12px;
+  padding: 20px;
+}
+
