@@ -113,13 +113,18 @@ function showDetailPopup(recipe) {
     }
   }
 
+  // Convert instructions to Step 1, Step 2, Step 3...
+  const steps = recipe.strInstructions
+    .split(/\r?\n/)
+    .filter(s => s.trim() !== "")
+    .map((s, i) => `<p class="mb-2"><strong>Step ${i + 1}:</strong> ${s}</p>`)
+    .join("");
+  
   const html = `
     <div id="recipeModal"
       class="popup-overlay">
 
       <div class="popup-card popup-fade">
-
-        <button onclick="closePopup()" class="close-btn">✕</button>
 
         <img src="${recipe.strMealThumb}" class="w-full h-56 object-cover" />
 
@@ -131,7 +136,13 @@ function showDetailPopup(recipe) {
 
           <h3 class="font-semibold text-lg mb-1">Instructions</h3>
           <div class="leading-relaxed whitespace-pre-line">
-            ${recipe.strInstructions}
+            ${steps}
+
+          <button onclick="closePopup()"
+            class="w-full bg-red-600 py-3 text-lg font-semibold hover:bg-red-700 transition">
+            Close
+          </button>
+            
           </div>
         </div>
 
