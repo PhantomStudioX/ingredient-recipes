@@ -60,17 +60,6 @@ body {
   flex-direction: column;
 }
 
-/* Close */
-.close-btn {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  font-size: 26px;
-  border: none;
-  background: none;
-  cursor: pointer;
-}
-
 /* Title */
 .popup-card h2 {
   margin: 0;
