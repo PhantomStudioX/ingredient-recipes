@@ -6,6 +6,7 @@ function addIngredient() {
 
   if (!value) return;
 
+  ingredients.push(value);
   // split by comma
   const newItems = value.split(",").map(i => i.trim()).filter(i => i !== "");
 
@@ -33,36 +34,49 @@ function removeIngredient(index) {
   displayIngredients();
 }
 
+// ⭐ Get recipes that match ANY ingredient, not all
 async function searchRecipes() {
   if (ingredients.length === 0) {
+    alert("Please add at least one ingredient!");
     alert("Please enter ingredients!");
     return;
   }
 
-  let ingredientResults = [];
+  const ingredient = ingredients.join(",");
 
-  // Fetch for each ingredient
+  const url = `https://www.themealdb.com/api/json/v1/1/filter.php?i=${ingredient}`;
+  let allResults = [];
+
+  const response = await fetch(url);
+  const data = await response.json();
+  // fetch recipes for each ingredient separately
   for (let ing of ingredients) {
     const url = `https://www.themealdb.com/api/json/v1/1/filter.php?i=${ing}`;
     const response = await fetch(url);
     const data = await response.json();
 
-    // If any ingredient has 0 results → no recipe can match all
-    if (!data.meals) {
-      ingredientResults.push([]);
-      continue;
+  if (!data.meals) {
+    document.getElementById("results").innerHTML =
+      "<p class='text-center text-gray-600'>No recipes found.</p>";
+    return;
+    if (data.meals) {
+      allResults.push(...data.meals);
     }
-
-    ingredientResults.push(data.meals); // store meals list
   }
 
-  // INTERSECTION: only meals that appear in EVERY list
-  let commonMeals = ingredientResults.reduce((acc, list) => {
-    if (acc.length === 0) return list; // first list
-    return acc.filter(a => list.some(b => b.idMeal === a.idMeal));
-  }, []);
+  displayResults(data.meals);
+  // remove duplicates
+  const unique = [];
+  const ids = new Set();
 
-  displayResults(commonMeals);
+  allResults.forEach(meal => {
+    if (!ids.has(meal.idMeal)) {
+      ids.add(meal.idMeal);
+      unique.push(meal);
+    }
+  });
+
+  displayResults(unique);
 }
 
 function displayResults(recipes) {
@@ -92,12 +106,15 @@ function displayResults(recipes) {
 
 async function getDetails(id) {
   const url = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
+
   const response = await fetch(url);
   const data = await response.json();
+
   showDetailPopup(data.meals[0]);
 }
 
 function showDetailPopup(recipe) {
+  // Build ingredients list
   // Build ingredients (MealDB gives up to 20)
   let ingredientList = "";
   for (let i = 1; i <= 20; i++) {
