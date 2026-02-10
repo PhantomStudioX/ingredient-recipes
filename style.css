@@ -71,13 +71,3 @@ body {
   border-radius: 12px;
   margin-bottom: 15px;
 }
-
-#recipeModal {
-  pointer-events: none;
-}
-
-#recipeModal .popup-card,
-#recipeModal > div {
-  pointer-events: auto;
-}
-
