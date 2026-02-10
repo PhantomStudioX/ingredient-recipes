@@ -6,7 +6,10 @@ function addIngredient() {
 
   if (!value) return;
 
-  ingredients.push(value);
+  // split by comma
+  const newItems = value.split(",").map(i => i.trim()).filter(i => i !== "");
+
+  ingredients.push(...newItems);
   input.value = "";
   displayIngredients();
 }
@@ -30,31 +33,48 @@ function removeIngredient(index) {
   displayIngredients();
 }
 
+// ⭐ Get recipes that match ANY ingredient, not all
 async function searchRecipes() {
   if (ingredients.length === 0) {
-    alert("Please add at least one ingredient!");
+    alert("Please enter ingredients!");
     return;
   }
 
-  const ingredient = ingredients.join(",");
+  let allResults = [];
 
-  const url = `https://www.themealdb.com/api/json/v1/1/filter.php?i=${ingredient}`;
+  // fetch recipes for each ingredient separately
+  for (let ing of ingredients) {
+    const url = `https://www.themealdb.com/api/json/v1/1/filter.php?i=${ing}`;
+    const response = await fetch(url);
+    const data = await response.json();
 
-  const response = await fetch(url);
-  const data = await response.json();
-
-  if (!data.meals) {
-    document.getElementById("results").innerHTML =
-      "<p class='text-center text-gray-600'>No recipes found.</p>";
-    return;
+    if (data.meals) {
+      allResults.push(...data.meals);
+    }
   }
 
-  displayResults(data.meals);
+  // remove duplicates
+  const unique = [];
+  const ids = new Set();
+
+  allResults.forEach(meal => {
+    if (!ids.has(meal.idMeal)) {
+      ids.add(meal.idMeal);
+      unique.push(meal);
+    }
+  });
+
+  displayResults(unique);
 }
 
 function displayResults(recipes) {
   const container = document.getElementById("results");
   container.innerHTML = "";
+
+  if (recipes.length === 0) {
+    container.innerHTML = "<p>No recipes found.</p>";
+    return;
+  }
 
   recipes.forEach((recipe) => {
     container.innerHTML += `
@@ -74,15 +94,13 @@ function displayResults(recipes) {
 
 async function getDetails(id) {
   const url = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
-
   const response = await fetch(url);
   const data = await response.json();
-
   showDetailPopup(data.meals[0]);
 }
 
 function showDetailPopup(recipe) {
-  // Build ingredients list
+  // Build ingredients (MealDB gives up to 20)
   let ingredientList = "";
   for (let i = 1; i <= 20; i++) {
     const ingredient = recipe[`strIngredient${i}`];
