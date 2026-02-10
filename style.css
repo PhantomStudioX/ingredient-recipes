@@ -143,3 +143,24 @@ button.bg-purple-600 {
 button.bg-purple-600:hover {
   background: #6237e8 !important;
 }
+
+/* Page background texture */
+body {
+  background: linear-gradient(180deg, #0c0c0c, #121212, #0e0e0e);
+}
+
+/* Center the whole app better */
+.max-w-xl {
+  margin-top: 20px;
+}
+
+/* Improve ingredient chips in dark mode */
+#ingredientList div {
+  background: #1e1e1e !important;
+  border: 1px solid #333 !important;
+}
+
+/* Improve card drop shadow */
+.recipe-card {
+  box-shadow: 0 8px 24px rgba(0,0,0,0.55) !important;
+}
