@@ -1,5 +1,10 @@
+/* Global Dark Mode Theme */
 body {
   font-family: Arial, sans-serif;
+  background: #121212; /* dark background */
+  color: #e8e8e8; /* soft white text */
+  min-height: 100vh;
+  background-attachment: fixed;
 }
 
 /* Smooth fade animation */
@@ -26,7 +31,7 @@ body {
 
 /* Card */
 .popup-card {
-  background: #fff;
+  background: #1e1e1e;
   width: 100%;
   max-width: 420px;
   border-radius: 18px;
@@ -53,7 +58,7 @@ body {
   margin: 0;
   padding: 20px;
   text-align: center;
-  background: #f8f8f8;
+  background: #232323;
   font-size: 22px;
   font-weight: 600;
 }
@@ -63,6 +68,8 @@ body {
   padding: 20px;
   overflow-y: auto;
   flex: 1;
+  background: #1e1e1e;
+  color: #e8e8e8;
 }
 
 /* Image */
@@ -70,4 +77,51 @@ body {
   width: 100%;
   border-radius: 12px;
   margin-bottom: 15px;
+}
+
+/* Dark Mode Recipe Cards */
+#results > div {
+  background: #1c1c1c;
+  padding: 16px;
+  border-radius: 14px;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.4);
+  transition: transform 0.2s ease, background 0.2s ease;
+  border: 1px solid #2a2a2a;
+}
+
+#results > div:hover {
+  transform: scale(1.03);
+  background: #252525;
+}
+
+/* Dark Inputs */
+input {
+  background: #1c1c1c !important;
+  color: #e8e8e8 !important;
+  border: 1px solid #333 !important;
+}
+
+input::placeholder {
+  color: #888;
+}
+
+/* Dark Buttons override */
+button {
+  border-radius: 10px !important;
+}
+
+button.bg-green-600 {
+  background: #2d7f46 !important;
+}
+
+button.bg-green-600:hover {
+  background: #2b6f3f !important;
+}
+
+button.bg-purple-600 {
+  background: #7042ff !important;
+}
+
+button.bg-purple-600:hover {
+  background: #6237e8 !important;
 }
