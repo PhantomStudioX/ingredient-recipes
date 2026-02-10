@@ -132,7 +132,8 @@ function showDetailPopup(recipe) {
 }
 
 function closePopup() {
-  const modal = document.getElementById("recipe-popup");
-  if (modal) modal.remove();
-  document.body.style.overflow = "auto";
+  const container = document.getElementById("popupContainer");
+  container.innerHTML = "";        // remove the popup HTML
+  document.body.style.overflow = "auto"; // allow scrolling again
 }
+
