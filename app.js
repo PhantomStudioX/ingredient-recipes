@@ -95,7 +95,7 @@ function showDetailPopup(recipe) {
           .filter(s => s.step.trim() !== "");
 
   const ingredientList = recipe.extendedIngredients
-    .map(i => `<li class="mb-1">• ${i.original}</li>`)
+    .map(i => `<li>• ${i.original}</li>`)
     .join("");
 
   const stepHtml = steps
@@ -103,27 +103,25 @@ function showDetailPopup(recipe) {
     .join("");
 
   const html = `
-    <div id="recipeModal"
-      class="fixed inset-0 bg-black bg-opacity-60 backdrop-blur-md flex justify-center items-center p-4 z-50">
+    <div class="popup-overlay" id="recipeModal">
 
-      <div class="bg-white rounded-2xl max-w-lg w-full shadow-2xl overflow-y-auto max-h-[90vh] animate-fadeIn">
-        <img src="${recipe.image}" class="w-full h-56 object-cover" />
+      <div class="popup-card">
+        <button class="close-btn" onclick="closePopup()">✕</button>
 
-        <div class="p-5">
-          <h2 class="text-2xl font-bold mb-3">${recipe.title}</h2>
+        <h2>${recipe.title}</h2>
+
+        <div class="popup-content">
+          <img src="${recipe.image}" />
 
           <h3 class="font-semibold text-lg mb-1">Ingredients</h3>
-          <ul class="mb-4 text-gray-700 list-disc pl-5">${ingredientList}</ul>
+          <ul class="mb-4">${ingredientList}</ul>
 
           <h3 class="font-semibold text-lg mb-1">Instructions</h3>
-          <div class="text-gray-700 leading-relaxed">${stepHtml}</div>
-
-          <button onclick="closePopup()"
-            class="mt-6 w-full bg-red-500 text-white py-2 rounded-lg hover:bg-red-600 transition">
-            Close
-          </button>
+          ${stepHtml}
         </div>
+
       </div>
+
     </div>
   `;
 
@@ -132,8 +130,6 @@ function showDetailPopup(recipe) {
 }
 
 function closePopup() {
-  const container = document.getElementById("popupContainer");
-  container.innerHTML = "";        // remove the popup HTML
-  document.body.style.overflow = "auto"; // allow scrolling again
+  document.getElementById("popupContainer").innerHTML = "";
+  document.body.style.overflow = "auto";
 }
-
