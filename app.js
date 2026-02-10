@@ -20,9 +20,9 @@ function displayIngredients() {
 
   ingredients.forEach((item, index) => {
     container.innerHTML += `
-      <div class="flex justify-between items-center p-2 bg-white rounded border">
+      <div class="bg-[#222] text-white px-3 py-2 rounded-full flex items-center gap-2 text-sm border border-[#333]">
         <span>${item}</span>
-        <button onclick="removeIngredient(${index})" class="text-red-500 text-sm">Remove</button>
+        <button onclick="removeIngredient(${index})" class="text-red-400">✕</button>
       </div>
     `;
   });
