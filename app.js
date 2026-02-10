@@ -102,7 +102,7 @@ async function getDetails(id) {
 }
 
 function showDetailPopup(recipe) {
-  // Build ingredients (MealDB gives up to 20)
+  // Build ingredients
   let ingredientList = "";
   for (let i = 1; i <= 20; i++) {
     const ingredient = recipe[`strIngredient${i}`];
@@ -115,28 +115,26 @@ function showDetailPopup(recipe) {
 
   const html = `
     <div id="recipeModal"
-      class="fixed inset-0 bg-black bg-opacity-60 backdrop-blur-md flex justify-center items-center p-4 z-50">
+      class="popup-overlay">
 
-      <div class="bg-white rounded-2xl max-w-lg w-full shadow-2xl overflow-y-auto max-h-[90vh] animate-fadeIn">
+      <div class="popup-card popup-fade">
+
+        <button onclick="closePopup()" class="close-btn">✕</button>
 
         <img src="${recipe.strMealThumb}" class="w-full h-56 object-cover" />
 
-        <div class="p-5">
-          <h2 class="text-2xl font-bold mb-3">${recipe.strMeal}</h2>
+        <div class="popup-content">
+          <h2>${recipe.strMeal}</h2>
 
           <h3 class="font-semibold text-lg mb-1">Ingredients</h3>
-          <ul class="mb-4 text-gray-700 list-disc pl-5">${ingredientList}</ul>
+          <ul class="mb-4">${ingredientList}</ul>
 
           <h3 class="font-semibold text-lg mb-1">Instructions</h3>
-          <div class="text-gray-700 leading-relaxed whitespace-pre-line">
+          <div class="leading-relaxed whitespace-pre-line">
             ${recipe.strInstructions}
           </div>
-
-          <button onclick="closePopup()"
-            class="mt-6 w-full bg-red-500 text-white py-2 rounded-lg hover:bg-red-600 transition">
-            Close
-          </button>
         </div>
+
       </div>
     </div>
   `;
