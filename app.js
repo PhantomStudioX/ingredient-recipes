@@ -85,7 +85,6 @@ async function getDetails(id) {
 }
 
 function showDetailPopup(recipe) {
-  // Fallback step cleanup
   const steps =
     recipe.analyzedInstructions?.[0]?.steps?.length > 0
       ? recipe.analyzedInstructions[0].steps
@@ -100,29 +99,25 @@ function showDetailPopup(recipe) {
     .join("");
 
   const stepHtml = steps
-    .map(s => `<p><strong>Step ${s.number}:</strong> ${s.step}</p>`)
+    .map(s => `<p class="mb-2"><strong>Step ${s.number}:</strong> ${s.step}</p>`)
     .join("");
 
   const html = `
-    <div id="recipeModal"
-      class="fixed inset-0 bg-black bg-opacity-60 backdrop-blur-md flex justify-center items-center p-4 z-50">
+    <div id="recipe-popup" class="popup-overlay">
+      <div class="popup-card">
 
-      <div class="bg-white rounded-2xl max-w-lg w-full shadow-2xl overflow-hidden animate-fadeIn">
-        <img src="${recipe.image}" class="w-full h-56 object-cover" />
+        <button onclick="closePopup()" class="close-btn">×</button>
 
-        <div class="p-5">
-          <h2 class="text-2xl font-bold mb-3">${recipe.title}</h2>
+        <h2>${recipe.title}</h2>
+
+        <div class="popup-content">
+          <img src="${recipe.image}" />
 
           <h3 class="font-semibold text-lg mb-1">Ingredients</h3>
           <ul class="mb-4 text-gray-700 list-disc pl-5">${ingredientList}</ul>
 
           <h3 class="font-semibold text-lg mb-1">Instructions</h3>
           <div class="text-gray-700 leading-relaxed">${stepHtml}</div>
-
-          <button onclick="closePopup()"
-            class="mt-6 w-full bg-red-500 text-white py-2 rounded-lg hover:bg-red-600 transition">
-            Close
-          </button>
         </div>
       </div>
     </div>
@@ -133,7 +128,7 @@ function showDetailPopup(recipe) {
 }
 
 function closePopup() {
-  const modal = document.getElementById("recipeModal");
+  const modal = document.getElementById("recipe-popup");
   if (modal) modal.remove();
   document.body.style.overflow = "auto";
 }
