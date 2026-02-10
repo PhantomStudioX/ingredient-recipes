@@ -1,13 +1,27 @@
+/* App background */
 body {
-  background: #0f0f0f;         /* deep dark background */
-  color: #f5f5f5;              /* bright text */
+  background: #0c0c0c;
+  color: white;
   font-family: Arial, sans-serif;
 }
 
-/* Card background for results */
+/* Recipe card */
 .recipe-card {
   background: #1a1a1a;
   border: 1px solid #333;
+}
+
+/* Popup Dark Mode */
+.popup-card {
+  background: #1a1a1a;
+  color: white;
+}
+
+.popup-content {
+  color: #e5e5e5;
+}
+
+.close-btn {
   color: white;
 }
 
