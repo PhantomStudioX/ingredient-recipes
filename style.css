@@ -8,7 +8,7 @@ body {
   to   { opacity: 1; transform: scale(1); }
 }
 
-.animate-fadeIn {
+.popup-fade {
   animation: fadeIn 0.25s ease-out;
 }
 
