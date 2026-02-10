@@ -12,44 +12,49 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 
-<body class="dark:bg-[#0f0f0f] overflow-auto">
-  <div class="max-w-2xl mx-auto p-6">
+<body class="bg-[#0c0c0c] text-white overflow-auto">
 
-    <h1 class="text-3xl font-bold mb-6 text-center">Find Easy Recipes</h1>
+  <!-- APP HEADER -->
+  <header class="py-6 px-5 bg-[#111111] shadow-md sticky top-0 z-10">
+    <h1 class="text-3xl font-extrabold">🍳 Recipe Finder</h1>
+    <p class="text-gray-400 text-sm mt-1">Find meals using ingredients you already have</p>
+  </header>
 
-    <!-- INPUT SECTION -->
-    <div class="flex gap-2 mb-4">
+  <div class="max-w-xl mx-auto p-5">
+
+    <!-- INPUT -->
+    <div class="mt-6 flex gap-2">
       <input
         id="ingredientInput"
         type="text"
         placeholder="Enter ingredient..."
-        class="flex-1 p-3 border rounded-lg"
+        class="flex-1 p-3 rounded-xl bg-[#1a1a1a] border border-[#333] text-white placeholder-gray-500"
       />
       <button
         onclick="addIngredient()"
-        class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition"
+        class="px-5 bg-green-600 rounded-xl text-white font-semibold hover:bg-green-700"
       >
         Add
       </button>
     </div>
 
-    <!-- INGREDIENT LIST -->
-    <div id="ingredientList" class="space-y-2 mb-6"></div>
+    <!-- INGREDIENT TAGS -->
+    <div id="ingredientList" class="flex flex-wrap gap-2 mt-4"></div>
 
-    <!-- SEARCH BUTTON -->
+    <!-- SEARCH BTN -->
     <button
       onclick="searchRecipes()"
-      class="w-full bg-purple-600 text-white py-3 rounded-lg text-lg font-semibold hover:bg-purple-700 transition"
+      class="w-full mt-5 bg-purple-600 py-3 rounded-xl text-lg font-bold hover:bg-purple-700 transition"
     >
       Search Recipes
     </button>
 
     <!-- RESULTS -->
-    <div id="results" class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-8"></div>
+    <div id="results" class="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-5"></div>
 
   </div>
 
-  <!-- POPUP CONTAINER (NEEDED FOR JS!) -->
+  <!-- POPUP -->
   <div id="popupContainer"></div>
 
   <script src="app.js"></script>
